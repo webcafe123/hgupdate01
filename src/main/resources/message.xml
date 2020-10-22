@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="messagens">
+
+	<resultMap type="message" id="msgResult">
+		<result property="m_num" column= "m_num" />
+		<result property = "m_sender_id" column = "m_sender_id" />
+		<result property = "m_sender_nick" column = "m_sender_nick" />
+		<result property = "m_sender_ip" column = "m_sender_ip" />
+		<result property = "m_sender_del" column = "m_sender_del" />
+		<result property = "m_receiver_id" column = "m_receiver_id" />
+		<result property = "m_receiver_nick" column = "m_receiver_nick" />
+		<result property = "m_receiver_del" column = "m_receiver_del" />
+		<result property = "m_subject" column = "m_subject" />
+		<result property = "m_content" column = "m_content" />
+		<result property = "m_send_date" column = "m_send_date" />
+	</resultMap>
+
+
+	<insert id="insert" parameterType="message">
+		<!-- insert into message values
+		(AA.nextval, 'pyj078', '유댕ㅎㅎ', '0:0:0:0', 'n', #{m_receiver_id}, '테스트용','n', '제목없음', #{m_content}, sysdate) -->
+		
+		insert into message values(AA.nextval, 'pyj078', '유댕ㅎㅎ', '0:0:0:0','n', #{m_receiver_id}, 
+		(select user_nickname from user_info
+			where user_id = #{m_receiver_id}),'n', '제목없음', #{m_content}, sysdate)
+	</insert>
+	
+	<select id="sendlist" parameterType="message" resultMap="msgResult">
+		select * from (select a.*, rownum rn from 
+							(select * from message  order by m_num desc) a)
+			where m_sender_nick = '유댕ㅎㅎ' and rn between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="reclist" resultMap="msgResult">
+		select * from (select a.*, rownum rn from 
+							(select * from message  order by m_num desc) a)
+			where m_receiver_nick = '쁘띠길동' and rn between #{startRow} and #{endRow}		
+	</select>
+	
+	<select id="getTotal" parameterType="message"  resultType="integer">
+		select count(*) from message where m_sender_nick = '유댕ㅎㅎ' 
+		
+	</select>
+	
+	<select id="getTotal_r" parameterType="message"  resultType="integer">
+		select count(*) from message where m_receiver_nick = '쁘띠길동' 
+		
+	</select>
+	
+	<update id="delete" parameterType="integer">
+		update message set m_sender_del='y' where m_num=#{m_num}
+	</update>
+
+	<update id="delete2" parameterType="integer">
+		update message set m_receiver_del='y' where m_num=#{m_num}
+	</update>
+</mapper>
+
+
+

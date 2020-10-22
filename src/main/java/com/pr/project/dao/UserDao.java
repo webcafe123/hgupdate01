@@ -9,5 +9,10 @@ public interface UserDao {
 	User select1(String user_nickname);
 
 	int insert(User user);
+	
+	// 유정 추가 부분
+	User selectN(String user_nickname);
+
+	int updateN(User user);
 
 }

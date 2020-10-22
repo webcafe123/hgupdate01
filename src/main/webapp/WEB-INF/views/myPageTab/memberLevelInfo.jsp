@@ -25,7 +25,7 @@
 		<div id="pop_container">
 			<div class="pop_content">
 				<div class="bx_type" style="margin-top: 8px">
-					<strong>닉네임(pyj0****) 님은 <span class="c_gn">꿀벌</span>입니다.
+					<strong>${user_nickname } ( ${user_id } ) 님은 <span class="c_gn">꿀벌</span>입니다.
 					</strong>
 					<ul>
 						<li class="fst">총 게시글 <em>0</em>개
@@ -34,7 +34,7 @@
 						</li>
 						<li>출석 수 <em>6</em>회
 						</li>
-						<li>가입일 2020.10.14.</li>
+						<li>가입일 ${user_regdate }</li>
 					</ul>
 				</div>
 				<div class="txt_top">

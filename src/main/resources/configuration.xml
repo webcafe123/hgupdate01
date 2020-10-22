@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="reply" type="com.pr.project.model.Reply" />
 		<typeAlias alias="user" type="com.pr.project.model.User" />
 		<typeAlias alias="loginip" type="com.pr.project.model.LoginIp" />
+		<typeAlias alias="message" type="com.pr.project.model.Message"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="board.xml" />
@@ -16,5 +17,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="reply.xml" />
 		<mapper resource="user.xml" />
 		<mapper resource="loginip.xml" />
+		<mapper	resource="message.xml" />
 	</mappers>
 </configuration>

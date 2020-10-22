@@ -27,5 +27,19 @@ public class UserDaoImpl implements UserDao {
 	public int insert(User user) {
 		return sst.insert("userns.insert", user);
 	}
+	
+	
+	//유정추가부분
+	@Override
+	public User selectN(String user_nickname) {
+		
+		return sst.selectOne("userns.selectN",user_nickname);
+	}
+
+	@Override
+	public int updateN(User user) {
+		
+		return sst.update("userns.updateN",user);
+	}
 }
 

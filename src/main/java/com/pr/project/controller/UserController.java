@@ -84,7 +84,7 @@ public class UserController {
 	public String login(User user, LoginIp loginip, Model model, HttpServletRequest request, HttpSession session) {
 		int result = 0;
 		User ur = us.select(user.getUser_id());
-
+		
 		if (ur == null || ur.getUser_del().equals("y"))
 			result = -1; // 없거나 탈퇴한 회원이다.
 		else if (user.getUser_pwd().equals(ur.getUser_pwd())) {
@@ -95,6 +95,14 @@ public class UserController {
 			session.setAttribute("user_id", user.getUser_id()); // 로그인 상태 유지
 			String a = (String) session.getAttribute("user_id");
 			System.out.println("login: session user id : "+a);
+			
+			
+			//유정 추가
+			session.setAttribute("user", ur);
+			System.out.println(ur);
+			System.out.println(ur.getUser_nickname()); // 닉네임 가져옴
+			session.setAttribute("user_nickname", ur.getUser_nickname());
+			session.setAttribute("user_regdate", ur.getUser_regdate());
 		}
 		model.addAttribute("result", result);
 		return "user/login";
@@ -104,6 +112,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		String a = (String) session.getAttribute("user_id");
 		System.out.println("logout/invalidate before : session user id : "+a);
+		System.out.println();
 		session.invalidate();
 		return "user/logout";
 	}

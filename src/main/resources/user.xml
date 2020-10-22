@@ -33,4 +33,15 @@
 		values(#{user_id},#{user_nickname},#{user_name},#{user_age},
 		#{user_email},#{user_ip},1,'n',sysdate,sysdate,#{user_pwd})
 	</insert>
+	
+	<!-- 유정 추가부분 -->
+	<select id="selectN"  parameterType="string" resultType="user">
+		select *
+		from user_info where user_nickname = #{user_nickname}
+	</select>
+	
+	<update id="updateN" parameterType="string">
+		update user_info set user_nickname = #{user_nickname} where user_id = #{user_id}
+	</update>
+	
 </mapper>

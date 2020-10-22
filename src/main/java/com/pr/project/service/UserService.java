@@ -10,5 +10,8 @@ public interface UserService {
 
 	int insert(User user);
 
+	//유정추가부분
+	User selectN(String user_nickname);
 
+	int updateN(User user);
 }

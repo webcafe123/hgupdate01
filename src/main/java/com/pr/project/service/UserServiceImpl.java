@@ -26,5 +26,19 @@ public class UserServiceImpl implements UserService {
 	public int insert(User user) {
 		return ud.insert(user);
 	}
+	
+	
+	//유정추가부분
+	@Override
+	public User selectN(String user_nickname) {
+		
+		return ud.selectN(user_nickname);
+	}
+
+	@Override
+	public int updateN(User user) {
+		
+		return ud.updateN(user);
+	}
 
 }
