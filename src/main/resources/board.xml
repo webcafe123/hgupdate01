@@ -1,98 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="boardns">
+	<resultMap type="board" id="boardResult">
+		<!-- type : 실제 자료형 / id : 별명 -->
+		<result property="b_num" column="b_num" />
+		<result property="b_c_num" column="b_c_num" />
+		<result property="b_subject" column="b_subject" />
+		<result property="b_id" column="b_id" />
+		<result property="b_nick" column="b_nick" />
+		<result property="b_content" column="b_content" />
+		<result property="b_read_cnt" column="b_read_cnt" />
+		<result property="b_reply_cnt" column="b_reply_cnt" />
+		<result property="b_like_cnt" column="b_like_cnt" />
+		<result property="b_regdate" column="b_regdate" />
+		<result property="b_update" column="b_update" />
+		<result property="b_ip" column="b_ip" />
+		<result property="b_notice" column="b_notice" />
+		<result property="del" column="del" />
+	</resultMap>
+	<resultMap type="fileUpload" id="fileUploadResult">
+		<result property="f_num" column="f_num"/>
+		<result property="f_b_num" column="f_b_num"/>
+		<result property="f_filename" column="f_filename"/>
+	</resultMap>
 
-<select id="list" resultType="board">
-	select * from board order by b_num desc
-</select>
 
-
-
-
-
-
-
-
-
-<!-- <select id="list" parameterType="map" resultType="board">
+<select id="list" parameterType="board" resultMap="boardResult">
+	<!-- select * from board -->
 	select * from
-    (select a.*, rownum rn from 
-    				// order by num desc
-    (select * from board order by ref desc,re_step)a )
-    where rn between #{startRow} and #{endRow}
-</select> -->
+	(select a.*, rownum rn from
+	(select * from board
 
-<!-- <select id="list" parameterType="board" resultType="board">
-	select * from
-    (select a.*, rownum rn from 
-    				order by num desc
-    (select * from board 
-    where를 쓸수도 안쓸수도 있다.
-    <where>
-    	<if test="keyword!=null and keyword!=''">
-    		<if test="search=='subcon'">
-    			subject like '%'||#{keyword}||'%' or
-    			content like '%'||#{keyword}||'%'
-    		</if>
-    		<if test="search!='subcon'">
-    			${search} like '%'||#{keyword}||'%'
-    		</if>    	
-    	</if>
-    </where>
-    order by ref desc,re_step)a )
-   		where rn between #{startRow} and #{endRow}
+	where
+	b_c_num=#{b_c_num} and b_del != 'y'
+	<if test="keyword!=null and keyword!=''">
+		and
+		<if test="search =='subcon'">
+			(b_subject like '%'||#{keyword}||'%' or
+			b_content like
+			'%'||#{keyword}||'%')
+		</if>
+		<if test="search!='subcon'">
+			(${search} like '%'||#{keyword}||'%')
+		</if>
+	</if>
+	order by b_num desc) a)
+
+	where rn between #{startRow} and #{endRow}
 </select>
-<select id="maxNum" resultType="integer">
-	ref와 num이 같을 수도 있고 다를수도 있어서 별도 생성
-	select nvl(max(num),0) + 1 num from board
-</select>
-<insert id="insert" parameterType="board">
-	<selectKey keyProperty="num" order="BEFORE" resultType="integer">
-		select nvl(max(num),0) + 1 num from board
-	</selectKey>
-	답변글이 아니면 num과 ref는 같은 값
-	insert into board values(#{num},#{writer},#{subject},
-		#{content},#{email},0,#{password},#{ref},#{re_step},
-		#{re_level},#{ip},sysdate,'n')
-</insert>
-<update id="updateReadCount">
-	update board set readcount = readcount + 1 where num=#{num}
-</update>
-<select id="select"  resultType="board">
-	select * from board where num=#{num}
-</select>
+
 <select id="getTotal" parameterType="board" resultType="integer">
 	select count(*) from board
-    <where>
-    	<if test="keyword!=null and keyword!=''">
-    		<if test="search=='subcon'">
-    			subject like '%'||#{keyword}||'%' or
-    			content like '%'||#{keyword}||'%'
-    		</if>
-    		<if test="search!='subcon'">
-    			${search} like '%'||#{keyword}||'%'
-    		</if>    	
-    	</if>
-    </where>
+	where b_c_num=#{b_c_num} and b_del != 'y'
+	<if test="keyword!=null and keyword!=''">
+		and
+		<if test="search=='subcon'">
+			(b_subject like '%'||#{keyword}||'%' or
+			b_content like
+			'%'||#{keyword}||'%')
+		</if>
+		<if test="search!='subcon'">
+			${search} like '%'||#{keyword}||'%'
+		</if>
+	</if>
 </select>
+
+<insert id="insert" parameterType="board">
+	insert into board
+	values(#{b_num}, #{b_c_num}, #{b_subject}, #{b_id},
+	#{b_nick},
+	#{b_content}, 0, 0, 0, sysdate, sysdate, #{b_ip},
+	'n', 'n')
+</insert>
+
+<select id="maxNum" resultType="integer">
+	select nvl(max(b_num),0) + 1 from board
+	<!-- null value logic => null 값이면 다음 숫자를 넣으시오 -->
+</select>
+
+<!-- <insert id="insertPhoto" parameterType="list"> insert all <foreach 
+	collection="list" item="item"> into file_upload (f_num, f_b_num, f_filename) 
+	values (get_seq,#{item.f_b_num},#{item.f_filename}) </foreach> select * from 
+	dual </insert> -->
+
+<update id="updateReadCount">
+	update board set b_read_cnt = b_read_cnt + 1 where
+	b_num=#{b_num}
+</update>
+<select id="select" resultType="board">
+	select * from board where
+	b_num=#{b_num}
+</select>
+
 <update id="update" parameterType="board">
-	update board set subject=#{subject},writer=#{writer},
-		email=#{email},content=#{content} where num=#{num}
+	update board set
+	b_num=#{b_num},
+	b_subject=#{b_subject}, b_content=#{b_content},
+	b_update=sysdate where
+	b_num=#{b_num}
 </update>
+
+
 <update id="delete" parameterType="integer">
-	update board set del='y' where num=#{num}
+	update board set b_del = 'y' where b_num = #{b_num}  <!-- 실제로 삭제된 것 아님 -->
 </update>
-<update id="updateRe_step" parameterType="board">
-	update board set re_step = re_step+1 
-		where ref=#{ref} and re_step > #{re_step}
-</update> -->
+
+<insert id="insertPhoto" parameterType="list">
+	insert all
+	<foreach collection="list" item="fu">
+		into file_upload (f_num, f_b_num, f_filename)
+		values (get_seq,#{fu.f_b_num},#{fu.f_filename})
+	</foreach>
+	select * from dual
+</insert>
+<select id="listPhoto" parameterType="integer"	resultMap="fileUploadResult">
+	select * from file_upload where f_b_num=#{f_b_num} order by f_num
+</select>
+
+<select id="photoFromList" parameterType="integer" resultMap="fileUploadResult">
+(select b.*, f2.f_filename as filename from board b inner join 
+	(select f.* from file_upload f inner join 
+		(select min(f_num) as fnum from file_upload where f_del='n' group by f_b_num) a on
+ f.f_num = a.fnum) f2 on b.b_num = f2.f_b_num)
+</select>
+
+<update id="updateLikeCount" parameterType="java.util.Map">
+      update board set
+      <if test="b_like_cnt == 1">
+      b_like_cnt = b_like_cnt + 1
+      </if>
+      
+      <if test="b_like_cnt == 0">
+      b_like_cnt = b_like_cnt - 1
+      </if>
+      where b_num=#{b_num}
+   </update>
 
 
 </mapper>
-
-
-
 
 
 

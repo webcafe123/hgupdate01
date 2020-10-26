@@ -13,7 +13,7 @@
 	<div style="width:1080px;height:35px;font-size:12px;">
 		<a href="http://www.naver.com"><img align="left" src="${path }/resources/images/n1.jpg" alt="" /></a>
 		<p align="right" style="padding-top:8px;color:#dedede">
-			<a href="main.html" style="color:black;padding-right:10px">카페홈</a>|
+			<a href="${path}/main.html" style="color:black;padding-right:10px">카페홈</a>|
 			<a href="" style="color:black;padding-left:5px;padding-right:10px">새글</a>|
 			<a href="" style="color:black;padding-left:5px;padding-right:10px">내소식</a>|
 			<a href="" style="color:black;padding-left:5px;padding-right:10px">채팅</a>|&nbsp

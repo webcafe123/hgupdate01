@@ -5,11 +5,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<typeAlias alias="board" type="com.pr.project.model.Board"/>
+		<typeAlias alias="cate" type="com.pr.project.model.Cate" />
 		<typeAlias alias="mypage" type="com.pr.project.model.User"/>
 		<typeAlias alias="reply" type="com.pr.project.model.Reply"/>
+		<typeAlias alias="fileUpload" type="com.pr.project.model.FileUpload"/>
 	</typeAliases>
 	<mappers>
 		<mapper	resource="board.xml" />
+		<mapper resource="cate.xml" />
 		<mapper	resource="mypage.xml" />
 		<mapper	resource="reply.xml" />
 	</mappers>
