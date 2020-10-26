@@ -222,8 +222,8 @@
   				alert(data);
    				var rnum = data.r_origin;
   				alert("rnum : " + rnum);
-  				$('#gbListTd_'+rnum).scrollTop();	 */
-  			});
+  				$('#gbListTd_'+rnum).scrollTop();	 
+  			}); */
   			
   		});
  	}
