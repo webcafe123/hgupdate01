@@ -45,11 +45,11 @@ create table board (
     b_ip                VARCHAR2(20) not null,
     b_notice            CHAR(1) default 'n', 
     b_del               CHAR(1) default 'n',
-    b_filename          VARCHAR2(100),
     CONSTRAINT b_num_pk PRIMARY KEY (b_num),
     FOREIGN KEY (b_c_num) REFERENCES cate (c_num),
     FOREIGN KEY (b_id) REFERENCES user_info (user_id)
 );
+ALTER TABLE board DROP COLUMN b_filename;
 alter table board add (b_filename varchar2(100)); 
 --업로드 파일
 create table file_upload (

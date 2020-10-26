@@ -73,4 +73,14 @@ public class ReplyServiceImpl implements ReplyService{
 		return rd.count(r_b_num);
 	}
 
+	@Override
+	public List<Reply> list3(int r_num) {
+		return rd.list3(r_num);
+	}
+
+	@Override
+	public Reply getReply(int r_num) {
+		return rd.getReply(r_num);
+	}
+
 }

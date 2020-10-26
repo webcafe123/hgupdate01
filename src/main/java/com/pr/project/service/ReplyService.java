@@ -30,5 +30,9 @@ public interface ReplyService {
 
 	int count(int r_b_num);
 
+	List<Reply> list3(int r_num);
+
+	Reply getReply(int r_num);
+
 
 }

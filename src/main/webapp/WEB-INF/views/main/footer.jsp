@@ -17,7 +17,7 @@
 		<a href="#header" style="font-size:12px;color:#9c9c9c">https://cafe.naver.com/4dramaenglish</a></p>
 	</div>
 	<div style="float:right;">
-		<a href="#header"><img src="${path}/resources/images/f1.jpg" alt="" /></a>
+		<a href="#header"><img src="/resources/images/f1.jpg" alt="" /></a>
 	</div>
 </div>
 </body>

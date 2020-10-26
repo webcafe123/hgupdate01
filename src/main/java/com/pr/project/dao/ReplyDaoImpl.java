@@ -73,4 +73,14 @@ public class ReplyDaoImpl implements ReplyDao{
 		return sst.selectOne("replyns.count", r_b_num);
 	}
 
+	@Override
+	public List<Reply> list3(int r_num) {
+		return sst.selectList("replyns.list3", r_num);
+	}
+
+	@Override
+	public Reply getReply(int r_num) {
+		return sst.selectOne("replyns.getReply", r_num);
+	}
+
 }
