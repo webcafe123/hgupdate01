@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="catens">
+
+<select id="list" parameterType="map" resultType="cate">
+	select * from cate order by ref asc, c_step asc
+	<!-- ref가 큰 순서대로, c_step이 작은 순서대로 하면 
+    최신글이 위로 되어있는 방향으로 출력된다. -->
+</select>
+<insert id="insert" parameterType="cate">
+	<!-- <selectKey keyProperty="c_num" order="BEFORE" resultType="integer">
+		select nvl(max(c_num),0) + 1 from cate
+		nvl = null value logic : null 값이면 다음 숫자를 넣으시오
+	</selectKey> -->
+	insert into cate values(#{c_num},#{c_subject},#{c_id},
+		#{c_intro},sysdate,'n',#{ref},#{c_step},#{c_level})
+</insert>
+<select id="select" resultType="cate">
+	select * from cate where c_num=#{c_num}
+</select>
+<update id="update" parameterType="cate">
+	update cate set c_subject=#{c_subject},c_intro=#{c_intro}
+		where c_num=#{c_num}
+</update>
+<update id="delete" parameterType="integer">
+	update cate set c_del='y' where c_num=#{c_num}
+</update>
+<select id="maxNum" resultType="integer">
+	select nvl(max(c_num),0) + 1 c_num from cate
+</select>
+<update id="updateC_step" parameterType="cate">
+	update cate set c_step = c_step+1
+		where ref=#{ref} and c_step > #{c_step}
+</update>
+
+
+
+
+
+
+	
+</mapper>
+
+
+
+
+
+

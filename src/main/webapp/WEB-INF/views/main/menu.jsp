@@ -10,6 +10,8 @@
 
 <script type="text/javascript">
 $(function(){
+	$('#cateDisp').load("${path}/cate/cate.html");
+	
 	
 	$('#bmi').attr('src',"/resources/images/s1.jpg");
 	$('#bmi').click(function() {
@@ -36,7 +38,24 @@ $(function(){
 		$('#myacti_span').attr('style','display:none;padding-top:7px;padding-bottom:7px;height:210px');
 		$('#cinfo_span').attr('style','display:active;padding-top:7px;padding-bottom:7px;height:210px');
 	});
-});	
+});
+	/* 창 크기 설정 + 가운데 띄우기*/
+	function setting(w, h){
+	   var popupWidth = w;
+	   var popupHeight = h;
+	   var popupX = Math.ceil(window.screen.width - popupWidth) / 2 ;
+	   // 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+	   var popupY= Math.ceil(window.screen.height - popupHeight) /2 ;
+	   // 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+	   var option = "width="+ w +",height="+ h + ",left=" + popupX + ",top=" + popupY + ",screenX=" + popupX + ",screenY=" + popupY + "resizable=no;";
+	   return option;
+	}
+	/* 회원정보수정 버튼 이벤트 */
+	function chatPopup(){
+	   var url = "http://172.30.1.103:8888/chat/chat.html";
+	   var newOption = setting(800,800);
+	   window.open(url,"",newOption);
+	}
 </script>
 
 </head>
@@ -63,7 +82,7 @@ $(function(){
 				</td>
 			</tr>
 		</table>
-		<table width="180px">
+		<table style="width: 180px">
 			<tr>
 				<td colspan="2" style="padding-top:10px;padding-bottom:5px" >
 					<a href="" style="font-size:13px;color:#7d7d7d"><img src="/resources/images/i1.jpg" alt="" />가지5단계</a>
@@ -121,8 +140,15 @@ $(function(){
 		
 	</div>
 	<button href="" style="text-align:center;background-color:#555555;width:200px;height:35px;color:white;border-radius:1px;border:1px solid #c2c2c2;font-size:13px;margin-top:10px;">카페 가입하기</button>
-	<button href="" style="text-align:center;background-color:white;width:200px;height:35px;border-radius:1px;border:1px solid #c2c2c2;margin-top:10px;margin-bottom:10px;font-size:13px;">카페 채팅
-		<img src="/resources/images/i7.jpg" alt="" style="margin-bottom:2px"/></button>
+
+	<a href="javascript:chatPopup();" class="btn btn-default" 
+		style="text-align:center;background-color:white;width:200px;height:35px;border-radius:1px;border:1px solid #c2c2c2;margin-top:10px;margin-bottom:10px;font-size:13px;">
+   		카페 채팅<img src="${path}/resources/images/i7.jpg" alt="" style="margin-bottom:2px"/></a>
+	<%-- <a href="http://172.30.1.103:8888/chat/chat.html" class="btn btn-default" 
+		style="text-align:center;background-color:white;width:200px;height:35px;border-radius:1px;border:1px solid #c2c2c2;margin-top:10px;margin-bottom:10px;font-size:13px;">
+		카페 채팅<img src="${path}/resources/images/i7.jpg" alt="" style="margin-bottom:2px"/></a> --%>
+	<%-- <button  style="text-align:center;background-color:white;width:200px;height:35px;border-radius:1px;border:1px solid #c2c2c2;margin-top:10px;margin-bottom:10px;font-size:13px;">카페 채팅
+		<img src="${path}/resources/images/i7.jpg" alt="" style="margin-bottom:2px"/></button> --%>
 	<form action="" method="post" class="form-horizontal">
 		<div class="form-inline form-group" style="padding-left:15px;padding-right:5px">
 			<input type="text" id="search" style="float:left;width:160px;height:25px;border-radius:1px;border:1px solid #c2c2c2;"/>
@@ -133,11 +159,17 @@ $(function(){
 	<!-- 게시판 category -->
 	
 	<section id="categorybar">
-	<div style="height:40px;padding-top:3px;border-top:2px solid black;border-bottom:1px solid #ededed;">
+	<div style="height:800px;padding-top:3px;border-top:2px solid black;border-bottom:1px solid #ededed;">
+	<!-- <div id="cateDisp" style="height:40px;padding-top:3px;border-top:2px solid black;border-bottom:1px solid #ededed;"> -->
 	
-	<u:categoriestag />
-	<a href="replyList.html?r_b_num=100">시험용</a><br />
-	<a href="guestBookView.html?r_b_num=100">시험용2</a><br />
+	<%-- <jsp:include page="${path}/cate/cate.jsp" flush="false"/> --%>
+	<div id="cateDisp"></div>
+	<!-- cateDist 어디에 두는것이 좋은가? -->
+	<div>
+	<a href="${path}/replyList.html?r_b_num=100">시험용</a><br />
+	<a href="${path}/guestBookView.html?r_b_num=100">시험용2</a><br />
+	</div>
+	
 	</div>
 	</section>
 </div>

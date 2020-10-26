@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans 
-	xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.1.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -24,15 +25,13 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.pr.project" />
-	
+
 	<!-- websocket : controller로 연결하지 않고 직접 연결 가능 -->
-<!--  
 	<default-servlet-handler/>
-	<beans:bean id="csh" class="com.pr.project.ChatsocketHandler"></beans:bean>
+	<beans:bean id="csh" class="com.pr.project.ChatSocketHandler"></beans:bean>
 	<websocket:handlers>
 		<websocket:mapping handler="csh" path="/chat-ws.do"/>		
 	</websocket:handlers>
--->
 
 	<beans:bean id="tilesViewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">

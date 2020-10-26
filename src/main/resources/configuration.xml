@@ -4,18 +4,21 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="board" type="com.pr.project.model.Board" />
-		<typeAlias alias="mypage" type="com.pr.project.model.User" />
-		<typeAlias alias="reply" type="com.pr.project.model.Reply" />
-		<typeAlias alias="user" type="com.pr.project.model.User" />
+		<typeAlias alias="board" type="com.pr.project.model.Board"/>
+		<typeAlias alias="cate" type="com.pr.project.model.Cate" />
+		<typeAlias alias="mypage" type="com.pr.project.model.User"/>
+		<typeAlias alias="reply" type="com.pr.project.model.Reply"/>
+		<typeAlias alias="fileUpload" type="com.pr.project.model.FileUpload"/>
+    <typeAlias alias="user" type="com.pr.project.model.User" />
 		<typeAlias alias="loginip" type="com.pr.project.model.LoginIp" />
 		<typeAlias alias="message" type="com.pr.project.model.Message"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="board.xml" />
-		<mapper resource="mypage.xml" />
-		<mapper resource="reply.xml" />
-		<mapper resource="user.xml" />
+		<mapper	resource="board.xml" />
+		<mapper resource="cate.xml" />
+		<mapper	resource="mypage.xml" />
+		<mapper	resource="reply.xml" />
+    <mapper resource="user.xml" />
 		<mapper resource="loginip.xml" />
 		<mapper	resource="message.xml" />
 	</mappers>

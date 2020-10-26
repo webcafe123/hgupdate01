@@ -14,6 +14,8 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/views/main/footer.jsp" />
 	</definition>
+	
+	
 	<definition name="main" extends="tilesbase">
 		<put-attribute name="title" value="첫 화면 입니다" />
 		<put-attribute name="body"
@@ -29,5 +31,59 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/guestBookView.jsp" />
 	</definition>
+	<definition name="/cate/cateList" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cate/cateList.jsp" />
+	</definition>
+<!-- 	<definition name="/cate/insertCateForm" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cate/insertCateForm.jsp" />
+	</definition> -->	
+<!--  	<definition name="/cate/cBoard" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cate/cBoard.jsp" />
+	</definition> -->		
+<!-- 	<definition name="/cate/updateForm" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cate/updateForm.jsp" />
+	</definition>	 -->	
+	<definition name="/cate/updateForm" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cate/updateForm.jsp" />
+	</definition>			
+	<definition name="/board/list" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/list.jsp" />
+	</definition>
+	<definition name="/board/insertBoardForm" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/insertBoardForm.jsp" />
+	</definition>
+	<definition name="/board/updateBoardForm" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/updateBoardForm.jsp" />
+	</definition>
+	<definition name="/board/boardView" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/boardView.jsp" />
+	</definition>			
+	<definition name="/board/listWithPhoto" extends="tilesbase">
+		<put-attribute name="title" value="test : 게시판 페이지 입뉘다" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/listWithPhoto.jsp" />
+	</definition>
 
+	
 </tiles-definitions>
+
+
+
