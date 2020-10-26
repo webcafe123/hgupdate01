@@ -23,7 +23,6 @@
 		</c:if>
 		<input type="hidden" name="r_id" value="tempid">
 		<input type="hidden" name="r_nick" value="tempnick">
-		<input type="hidden" name="r_guestBook" value="n">
 		
 		<div class="container" style="float:left;width:760px;border:2px solid #e5e5e5;border-radius:10px;padding-top:10px;padding-bottom:1px;">
 	 		<table>

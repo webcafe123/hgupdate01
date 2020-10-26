@@ -51,8 +51,21 @@
 </select>
 
 <select id="list2" parameterType="reply" resultType="reply">
-	select * from (select a.*, rownum rn from(select r.*, o.gbReply from reply r inner join (select r_origin, count(*)-1 as gbReply from reply where r_b_num=#{r_b_num} group by r_origin) o
- on r.r_num=o.r_origin order by r_num desc) a) where rn between #{startNum} and #{endNum}
+	select * from 
+		(select a.*, rownum rn from
+			(select r.*, o.gbReply from reply r inner join 
+				(select r_origin, count(*)-1 as gbReply from reply where r_b_num=#{r_b_num} group by r_origin) o
+ 			on r.r_num=o.r_origin order by r_num desc) 
+ 		a) 
+	where rn between #{startNum} and #{endNum}
+</select>
+
+<select id="list3" parameterType="integer" resultType="reply">
+	select * from reply where r_origin=#{r_num} and r_level!=0 order by r_step
+</select>
+
+<select id="getReply" parameterType="integer" resultType="reply">
+	select * from reply where r_num=#{r_num}
 </select>
 
 </mapper>

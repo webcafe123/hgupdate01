@@ -14,6 +14,7 @@
 		  if(confirm("정말 삭제하시겠습니까 ?") == true){
 		        alert("삭제되었습니다");
 		        $(location).attr('href', 'deleteReply.html?r_b_num='+r_b_num+'&r_num='+r_num); 
+		        window.history.back();
 		    }
 		    else{
 		        return;
@@ -41,10 +42,12 @@
 	}
  	function up(r_b_num, r_num){
  		alert("수정되었습니다");
-        $(location).attr('href', 'udpateReply.html?r_content='+$('#rCont2_'+r_num).val()+'&r_b_num='+r_b_num+'&r_num='+r_num); 
+/*      $(location).attr('href', 'udpateReply.html?r_content='+$('#rCont2_'+r_num).val()+'&r_b_num='+r_b_num+'&r_num='+r_num);  */
+ 		window.history.back();
 	}
 	function lst(r_b_num){
-		$(location).attr('href', 'replyList.html?r_b_num='+r_b_num);
+/* 		$(location).attr('href', 'replyList.html?r_b_num='+r_b_num); */
+		window.history.back();
 	} 
 	function modKey(r_num){
 		$('#tab_pop_'+r_num).appendTo('#modIcon_'+r_num);
@@ -130,7 +133,7 @@
 									<p id="rKey_${rl.r_num }" style="float:left;font-size:10px;color:#979797;cursor:pointer;margin-bottom:0px;" onclick="replKey(${rl.r_num},${rl.r_level})">답글쓰기</p>
 								</c:if>
 								<c:if test="${rl.r_level>=10}">							
-									<p id="rKey_${rl.r_num }" style="float:left;font-size:5px;color:#979797;margin-bottom:0px;">더 댓글을 달 수 없는 댓글입니다.</p>
+									<p style="float:left;font-size:5px;color:#979797;margin-bottom:0px;">더 댓글을 달 수 없는 댓글입니다.</p>
 								</c:if>
 								</p>
 							</td>
