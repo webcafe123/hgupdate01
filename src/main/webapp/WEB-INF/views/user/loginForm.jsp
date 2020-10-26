@@ -24,6 +24,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <title>꿀카페 :: 로그인</title>
+
 <style>
 html, body {
 	height: 100%;
@@ -91,25 +92,39 @@ body {
 }
 </style>
 </head>
+
 <body class="text-center">
-	<form class="form-signin" action="login.html" method="post"
-		align="center">
-		<img class="mb-4" src="${path }/resources/images/logo/login_logo2.png">
-	<!-- 	<h1 class="h3 mb-3 font-weight-normal">로그인</h1> -->
+
+	<form class="form-signin" action="login.html" method="post" align="center">
+		
+		 <!-- 로그인 로고를 넣고 로고에 꿀카페 홈페이지 연동시키기 -->
+		<div id="header" >
+			<a href="../main.html"><img class="mb-4" src="${path }/resources/images/logo/login_logo2.png"></a>
+		</div>
+		
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+		<!-- 아이디 -->
 		<label for="inputUser_id" class="sr-only">아이디</label> 
 		<input type="text" name="user_id" class="form-control" placeholder="아이디" required
 			autofocus>
 			
-			 <label for="user_pwd" class="sr-only">Password</label>
+		<!-- 비밀번호 -->
+		<label for="user_pwd" class="sr-only">Password</label>
 		<input type="password" name="user_pwd" class="form-control"
 			placeholder="비밀번호" required autofocus>
 		<p> </p>
+		
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+		
+		<!-- HOME과 회원가입(SIGN UP) 버튼 -->
 		<p>
-			<a href="../main.html"> | HOME | </a> <a href="joinForm.html"> SIGN
-				UP | </a>
+			| <a href="../main.html">HOME</a> <img src="${path }/resources/images/logo/honeyj3.png" height="20" width="22"> | 
+			<a href="joinForm.html">SIGN UP</a> <img src="${path }/resources/images/logo/honey2.png" height="20" width="20"> |
 		</p>
+		
+		<!-- 로그인 버튼 -->
 		<button class="btn btn-lg btn-primary btn-block" type="submit">LOGIN</button>
-		<!-- <p class="mt-5 mb-3 text-muted">꿀카페</p> -->
 		</form>
 </body>
 </html>

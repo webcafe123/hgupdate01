@@ -1,6 +1,8 @@
 package com.pr.project.model;
 
-import java.util.Date;
+
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data

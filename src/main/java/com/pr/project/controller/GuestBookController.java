@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pr.project.model.Reply;
 import com.pr.project.service.ReplyService;
@@ -21,6 +23,18 @@ public class GuestBookController {
 	public String replyForm(int r_ref, Model model) {
 		model.addAttribute("r_ref", r_ref);
 		return "/board/guestBookForm";
+	}
+	@RequestMapping("guestBookReplyForm.html")
+	public String gbReplyForm(int r_num, int r_ref, Model model) {
+		model.addAttribute("r_num", r_num);
+		model.addAttribute("r_ref", r_ref);
+		return "/board/guestBookReplyForm";
+	}
+	@RequestMapping("guestBookRereplyForm.html")
+	public String gbRereplyForm(int r_num, int r_ref, Model model) {
+		model.addAttribute("r_num", r_num);
+		model.addAttribute("r_ref", r_ref);
+		return "/board/guestBookRereplyForm";
 	}
 	
 	@RequestMapping("insertGuestBook.html")
@@ -46,19 +60,44 @@ public class GuestBookController {
 		return "redirect:guestBookView.html?r_b_num="+reply.getR_b_num();
 	}
 	
-	@RequestMapping("udpateguestBook.html")
-	public String update(String r_content, int r_b_num, int r_num, Model model) {
-		Reply reply = new Reply();
-		reply.setR_num(r_num);
-		reply.setR_content(r_content);
-		rs.update(reply);
-		return "redirect:guestBookView.html?r_b_num="+r_b_num;
+	@RequestMapping("guestBookUpdateForm.html")
+	public String gbUpdateForm(int r_num, Model model) {
+		Reply reply = rs.getReply(r_num);
+		model.addAttribute("reply", reply);
+		return "board/guestBookUpdateForm";
 	}
 	
-	@RequestMapping("deleteguestBook.html")
+	@RequestMapping("udpateGuestBook.html")
+	public String update(Reply reply, Model model) {
+		rs.update(reply);
+		return "redirect:guestBookView.html?r_b_num="+reply.getR_b_num();
+	}
+	
+	@RequestMapping("deleteGuestBook.html")
 	public String delete(int r_b_num, int r_num, Model model) {
 		rs.delete(r_num);
 		return "redirect:guestBookView.html?r_b_num="+r_b_num;
+	}
+	
+	@RequestMapping("gbReplyUpdate.html")
+	public String update(int r_num, String r_content, Model model) {
+		Reply reply = rs.getReply(r_num);
+		reply.setR_content(r_content);
+		rs.update(reply);
+		model.addAttribute("reply", reply);
+		return "/board/guestBookView";
+	}
+	
+	@RequestMapping("getReply.html")
+	public String getReply(int r_num, Model model) {
+		System.out.println("getReply.html 중 : 인자로 받은 r_num = "+r_num);
+		Reply reply = rs.getReply(r_num);
+	
+		System.out.println("getReply.html 중 : 인자로 받은 r_num = "+r_num);
+		System.out.println("getReply.html 중 : reply.getR_num() = "+reply.getR_num());
+		System.out.println("getReply.html 중 : reply.getR_origin() = "+reply.getR_origin());
+		model.addAttribute("r_origin", reply.getR_origin());
+		return "/board/reply";
 	}
 	
 	@RequestMapping("guestBookView.html")
@@ -88,6 +127,13 @@ public class GuestBookController {
 		model.addAttribute("replyList", replyList);
 
 		return "/board/guestBookList";
+	}
+	
+	@RequestMapping("guestBookReplyList")
+	public String list(int r_num, Model model) {
+		List<Reply> gbReplyList = rs.list3(r_num);
+		model.addAttribute("gbReplyList", gbReplyList);
+		return "/board/guestBookReplyList";
 	}
 	
 }
