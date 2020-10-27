@@ -63,17 +63,16 @@
 		<c:if test="${!(cat.c_level > 0) }">♬</c:if></td>
 		<td title="${cat.c_intro}">
 		
-		<c:if test="${!(cat.c_level > 0) }">
-			${cat.c_subject }
-		</c:if>
-		
-		<c:if test="${cat.c_level > 0 }">
-			<img src="images/level.gif" alt="" height="5"
-				width="${cat.c_level*10}">
-<!-- 여기 url 입력 어떻게? -->
-			<a href="${path}/board/list.html?b_c_num=${cat.c_num}"  
-				class="btn">${cat.c_subject }</a>
-		</c:if>	
+			<c:if test="${!(cat.c_level > 0) }">
+				${cat.c_subject }
+			</c:if>
+			
+			<c:if test="${cat.c_level > 0 }">
+				<img src="${path}/resources/images/level.gif" alt="" height="5" width="${cat.c_level*10}">
+				<img src="${path}/resources/images/list1.png" alt="" height="20" width="20"> 
+				<a href="${path}/board/list.html?b_c_num=${cat.c_num}"  
+					class="btn">${cat.c_subject }</a>
+			</c:if>	
 		</td>
 		
 		<td title="${cat.c_num}" align="center" width="5%">

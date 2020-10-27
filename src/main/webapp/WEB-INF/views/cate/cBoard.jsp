@@ -42,12 +42,10 @@
 	   var url = "${path}/cate/insertCateForm.html?nm=${cate.c_num }";
 	   var newOption = setting(900,300);
 	   window.open(url,"",newOption);
-	}	
+	}
 </script>
-
 </head><body>
-
-<div class="container" align="center" style="padding:10px;float:left;margin-left:20px;height:270px;width:840px;padding-top:20px;padding-bottom:20px;">
+<div class="container" align="center" style="padding:10px;float:left;margin-left:20px;height:270px;width:840px;padding-top:20px;padding-bottom:30px;margin:20px;">
 <div>
 	<h2 class="text-primary">${cate.c_subject }</h2>
 <table class="table table-striped table-bordered">

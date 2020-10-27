@@ -7,8 +7,6 @@
 
 <script type="text/javascript">
 	
-	
-	
 	location.href="/main.html"
 	//location.href="replyList.html?r_b_num=100";
 	

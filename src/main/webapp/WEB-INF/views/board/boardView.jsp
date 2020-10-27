@@ -83,7 +83,9 @@
          </tr>
 
          <tr>
-            <td colspan="2" style="color: #00cc00">${cate.c_subject }</td>
+            <td colspan="2">
+            	<a href="${path}/board/list.html?b_c_num=${cate.c_num}&pageNum=${pageNum}"  
+				style="color: #00cc00">${cate.c_subject } > </a></td>
          </tr>
          <tr>
             <td colspan="2" style="font-size: 30px;">${board.b_subject}</td>
@@ -128,7 +130,7 @@
             <td colspan="2">
                <div align="center">
                   <c:forEach var="fu" items="${list}">
-                     <img alt="" src="${path }/upload/${fu.f_filename}" width="200">
+                     <img alt="" src="/resources/upload/${fu.f_filename}" width="200">
                   </c:forEach>
                </div>
 

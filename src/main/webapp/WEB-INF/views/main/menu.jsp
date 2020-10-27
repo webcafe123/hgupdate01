@@ -139,7 +139,10 @@ $(function(){
 		
 		
 	</div>
-	<button href="" style="text-align:center;background-color:#555555;width:200px;height:35px;color:white;border-radius:1px;border:1px solid #c2c2c2;font-size:13px;margin-top:10px;">카페 가입하기</button>
+	<a href="${path}/user/joinForm.html" class="btn" 
+		style="text-align:center;background-color:#555555;width:200px;height:35px;color:white;border-radius:1px;border:1px solid #c2c2c2;font-size:13px;margin-top:10px;">
+		카페 가입하기</a>
+	<%-- <button href="${path}/user/joinForm.html" style="text-align:center;background-color:#555555;width:200px;height:35px;color:white;border-radius:1px;border:1px solid #c2c2c2;font-size:13px;margin-top:10px;">카페 가입하기</button> --%>
 
 	<a href="javascript:chatPopup();" class="btn btn-default" 
 		style="text-align:center;background-color:white;width:200px;height:35px;border-radius:1px;border:1px solid #c2c2c2;margin-top:10px;margin-bottom:10px;font-size:13px;">
@@ -149,12 +152,16 @@ $(function(){
 		카페 채팅<img src="${path}/resources/images/i7.jpg" alt="" style="margin-bottom:2px"/></a> --%>
 	<%-- <button  style="text-align:center;background-color:white;width:200px;height:35px;border-radius:1px;border:1px solid #c2c2c2;margin-top:10px;margin-bottom:10px;font-size:13px;">카페 채팅
 		<img src="${path}/resources/images/i7.jpg" alt="" style="margin-bottom:2px"/></button> --%>
-	<form action="" method="post" class="form-horizontal">
+<!-- 검색 기능 -->
+	<form action="searchList.html" method="post" class="form-horizontal">
 		<div class="form-inline form-group" style="padding-left:15px;padding-right:5px">
-			<input type="text" id="search" style="float:left;width:160px;height:25px;border-radius:1px;border:1px solid #c2c2c2;"/>
+			<input type="hidden" name="pageNum" value="1" />
+			<input type="text" id="search" style="float:left;width:160px;height:25px;border-radius:1px;border:1px solid #c2c2c2;"
+				placeholder="검색어를 입력하세요" name="keyword" value="${board.keyword }"/>
 			<input type="submit" value="검색" style="float:right;width:40px;height:25px;color:white;background-color:#24c932;border-radius:1px;border:1px solid #24c932;font-size:12px;margin-bottom:4px;"/>
 		</div>
 	</form>
+
 	
 	<!-- 게시판 category -->
 	

@@ -85,11 +85,7 @@ div.desc {
 		
 			<div class="gallery">
 				<a href="boardView.html?b_c_num=${cate.c_num}&b_num=${board.b_num}&pageNum=${pb.currentPage}">
-				   	<c:forEach var="fu" items="${photolist}">
-						<img alt="" src="${path }/upload/${fu.f_filename}" width="600" height="20">
-					</c:forEach> 
-				   
-				   <img src="${path }/upload/${fu.f_filename}" alt="${fu.f_filename}" alt="" >
+						<img src="/resources/upload/${board.filename}" alt="${board.filename}">
 				</a>
 
 			  
