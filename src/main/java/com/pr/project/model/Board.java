@@ -22,8 +22,10 @@ public class Board {
 	private String b_ip;		// 작성자 ip
 	private String b_notice;	// 공지 여부
 	private String b_del;		// 삭제 여부
-    private String b_filename;	// 파일이름
+    //private String b_filename;	// 파일이름
 	
+    private String filename;
+    
 	private MultipartFile file;	// upload 사진용
 	
 	// 페이징용

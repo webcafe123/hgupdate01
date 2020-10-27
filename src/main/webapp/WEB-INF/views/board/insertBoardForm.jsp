@@ -5,12 +5,12 @@
 <title>Insert title here</title></head><body>
 
 <div class="container" align="center" style="margin-left:200px;width:900px;padding-top:20px;padding-bottom:20px;">
-   <h2 class="text-primary">카페 글쓰기</h2>
+   <h2 class="text-primary" style="color: black">카페 글쓰기</h2>
 <form action="insertBoard.html" method="post" enctype="multipart/form-data">
    <input type="hidden" name="b_num" value="${board.b_num }">
    <%-- <input type="hidden" name="b_c_num" value="${cate.c_num }"> --%>
 <!-- 로그인 처리 작업 필요!!! -->   
-   <input type="hidden" name="b_id" value="sunmin">
+   <input type="hidden" name="b_id" value="${sessionScope.user_id }">
 
 <table class="table table-hover">
    <tr><td colspan="2" align="right">
@@ -36,8 +36,8 @@
       </select></td></tr>
    <tr><td >제목</td><td><input type="text" name="b_subject" class="form-control"
       required="required" autofocus="autofocus"></td></tr>
-   <tr><td>작성자</td><td><input type="text" name="b_nick" value="이름" class="form-control"
-      readonly="readonly">${board.b_nick }</td></tr>
+   <tr><td>작성자</td><td><input type="text" name="b_nick" value="${sessionScope.user_nickname }" class="form-control"
+      readonly="readonly"></td></tr>
    <tr><td>내용</td><td><textarea rows="30" cols="49" name="b_content" class="form-control"
       required="required"></textarea></td></tr>
    <tr><td>사진<span class="glyphicon glyphicon-picture"></span></td>

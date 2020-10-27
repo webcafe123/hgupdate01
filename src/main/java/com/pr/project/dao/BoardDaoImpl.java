@@ -27,7 +27,9 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	@Override
 	public int insert(Board board) {
-		return sst.insert("boardns.insert", board);
+		System.out.println("c_num="+board.getB_c_num());
+		System.out.println("b_id="+board.getB_id());
+		return sst.insert("boardns.insert", board); 
 	}
 	@Override
 	public void insertPhoto(List<FileUpload> fuPhotos) {
@@ -61,5 +63,9 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void updateLikeCount(HashMap<String, Object> param) {
 		sst.update("boardns.updateLikeCount", param);
+	}
+	@Override
+	public List<Board> listWithPhoto(Board board) {
+		return sst.selectList("boardns.listWithPhoto", board);
 	}
 }

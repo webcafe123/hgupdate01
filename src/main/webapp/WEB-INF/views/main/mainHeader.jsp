@@ -22,10 +22,10 @@
       
       <!-- 아이디가 세션에 있는 경우 -->
 				<c:if test="${not empty sessionScope.user_id}">
-					<a href="user/logout.html" class="btn btn-xs btn-default">로그아웃</a>
+					<a href="${path}/user/logout.html" class="btn btn-xs btn-default">로그아웃</a>
 				</c:if>
 				<c:if test="${empty sessionScope.user_id}">
-					<a href="user/loginForm.html" class="btn btn-xs btn-default">로그인</a>
+					<a href="${path}/user/loginForm.html" class="btn btn-xs btn-default">로그인</a>
 				</c:if>
 		</p>
 	</div>

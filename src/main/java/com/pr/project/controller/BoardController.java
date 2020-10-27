@@ -22,9 +22,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.pr.project.model.Board;
 import com.pr.project.model.Cate;
 import com.pr.project.model.FileUpload;
+import com.pr.project.model.User;
 import com.pr.project.service.BoardService;
 import com.pr.project.service.CateService;
 import com.pr.project.service.PagingBean;
+import com.pr.project.service.UserService;
 
 @Controller
 public class BoardController {
@@ -33,6 +35,9 @@ public class BoardController {
    private BoardService bs;
    @Autowired
    private CateService cs;
+   @Autowired
+   private UserService us;
+   
    
    @RequestMapping("board/list")
    public String list(Board board, String pageNum, Model model) {
@@ -64,6 +69,39 @@ public class BoardController {
       
       return "/board/list";
    }
+   @RequestMapping("board/searchList")
+   public String searchList(Board board, String pageNum, Model model) {
+	   bs.updateReadCount(board.getB_num());
+	   
+      int rowPerPage = 12;
+      if(pageNum == null || pageNum.equals("")) //페이지가 지정되지 않으면 1페이지를 보여줘라
+         pageNum="1";
+      int currentPage = Integer.parseInt(pageNum);
+      int total = bs.getTotal(board);
+      int startRow = (currentPage - 1)*rowPerPage + 1;
+      int endRow = startRow + rowPerPage - 1;
+      int no = total - startRow + 1; 			// 페이지별 시작번호
+      board.setStartRow(startRow);
+      board.setEndRow(endRow);	   
+      
+      List<Board> list = bs.list(board);
+      Board bd = bs.select(board.getB_num());
+      List<FileUpload> photolist = bs.photoFromList(board.getB_num());
+      
+      PagingBean pb = new PagingBean(currentPage, rowPerPage, total);
+      
+      String[] tit = {"작성자", "제목", "내용", "제목+내용"};
+      model.addAttribute("bd", bd);
+      model.addAttribute("tit",tit);
+      model.addAttribute("list",list);
+      model.addAttribute("board",board);
+      model.addAttribute("pb", pb);
+      model.addAttribute("no", no);
+      model.addAttribute("photolist", photolist);      
+	   
+	  return "/board/searchList";
+   }
+   
    @RequestMapping("board/listWithPhoto")
    public String listWithPhoto(Board board, String pageNum, Model model, 
 		   HttpSession session) {
@@ -81,10 +119,10 @@ public class BoardController {
       board.setStartRow(startRow);
       board.setEndRow(endRow);
       
-      List<Board> list = bs.list(board);
+      List<Board> list = bs.listWithPhoto(board);
       Board bd = bs.select(board.getB_num());
       List<FileUpload> photolist = bs.photoFromList(board.getB_num());
-      
+      System.out.println("갯수 : "+photolist.size());
       PagingBean pb = new PagingBean(currentPage, rowPerPage, total);
       
       String[] tit = {"작성자", "제목", "내용", "제목+내용"};
@@ -94,7 +132,7 @@ public class BoardController {
       model.addAttribute("board",board);
       model.addAttribute("pb", pb);
       model.addAttribute("no", no);
-      model.addAttribute("photolist", photolist);      
+		/* model.addAttribute("photo", photolist.get(0)); */      
       
       Cate cate = cs.select(board.getB_c_num());
       model.addAttribute("cate",cate);	   
@@ -103,7 +141,7 @@ public class BoardController {
    }	   
    @RequestMapping("board/insertBoardForm")
    public String insertBoardForm(Board board, Model model) {
-     
+	   
 	   Cate cate = cs.select(board.getB_c_num());
 	   model.addAttribute("cate",cate);
 	   List<Cate> list = cs.list();
@@ -114,15 +152,15 @@ public class BoardController {
 	   return "/board/insertBoardForm";
    }
    @RequestMapping("board/insertBoard")
-   public String insertBoard(Board board, String pageNum, Model model,
+   public String insertBoard(User user, Board board, String pageNum, Model model,
          HttpServletRequest request, HttpSession session,  
          MultipartHttpServletRequest mhsr) throws IOException {
-
-      board.setB_num(bs.maxNum());
+	   
+	  board.setB_num(bs.maxNum());
       board.setB_ip(request.getLocalAddr()); // ip setting      
       int result = bs.insert(board);
       
-      String real = session.getServletContext().getRealPath("/upload");
+      String real = session.getServletContext().getRealPath("/resources/upload");
       List<MultipartFile> list = mhsr.getFiles("file");
       //System.out.println("photo size="+list.size());
 
@@ -148,7 +186,11 @@ public class BoardController {
          }
       	model.addAttribute("pageNum", pageNum);
       	model.addAttribute("result", result);       
-      
+      	
+		/*
+		 * User use = us.select(user.getUser_id()); model.addAttribute("use", use);
+		 */
+      	
       	Cate cate = cs.select(board.getB_c_num());
       	model.addAttribute("cate",cate);
    

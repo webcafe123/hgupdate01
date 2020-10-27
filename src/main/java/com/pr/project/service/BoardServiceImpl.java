@@ -60,5 +60,9 @@ public class BoardServiceImpl implements BoardService {
 	public void updateLikeCount(HashMap<String, Object> param) {
 		bd.updateLikeCount(param);
 	}
+	@Override
+	public List<Board> listWithPhoto(Board board) {
+		return bd.listWithPhoto(board);
+	}
 	
 }

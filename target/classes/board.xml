@@ -32,6 +32,10 @@
 	select * from
 	(select a.*, rownum rn from
 	(select * from board
+		<!-- (select b.*, f2.f_filename as filename from board b inner join 
+		(select f.* from file_upload f inner join 
+			(select min(f_num) as fnum from file_upload where f_del='n' group by f_b_num) a on
+	 f.f_num = a.fnum) f2 on b.b_num = f2.f_b_num) -->
 
 	where
 	b_c_num=#{b_c_num} and b_del != 'y'
@@ -50,6 +54,36 @@
 
 	where rn between #{startRow} and #{endRow}
 </select>
+
+
+<select id="listWithPhoto" parameterType="board" resultMap="boardResult">
+	<!-- select * from board -->
+	select * from
+	(select a.*, rownum rn from
+	(select * from 
+		(select b.*, f2.f_filename as filename from board b inner join 
+		(select f.* from file_upload f inner join 
+			(select min(f_num) as fnum from file_upload where f_del='n' group by f_b_num) a on
+	 f.f_num = a.fnum) f2 on b.b_num = f2.f_b_num)
+
+	where
+	b_c_num=#{b_c_num} and b_del != 'y'
+	<if test="keyword!=null and keyword!=''">
+		and
+		<if test="search =='subcon'">
+			(b_subject like '%'||#{keyword}||'%' or
+			b_content like
+			'%'||#{keyword}||'%')
+		</if>
+		<if test="search!='subcon'">
+			(${search} like '%'||#{keyword}||'%')
+		</if>
+	</if>
+	order by b_num desc) a)
+
+	where rn between #{startRow} and #{endRow}
+</select>
+
 
 <select id="getTotal" parameterType="board" resultType="integer">
 	select count(*) from board
@@ -102,7 +136,6 @@
 	b_num=#{b_num}
 </update>
 
-
 <update id="delete" parameterType="integer">
 	update board set b_del = 'y' where b_num = #{b_num}  <!-- 실제로 삭제된 것 아님 -->
 </update>
@@ -115,6 +148,7 @@
 	</foreach>
 	select * from dual
 </insert>
+
 <select id="listPhoto" parameterType="integer"	resultMap="fileUploadResult">
 	select * from file_upload where f_b_num=#{f_b_num} order by f_num
 </select>

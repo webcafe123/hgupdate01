@@ -26,7 +26,7 @@ function setting(w, h){
 
 /* 멤버등급 안내 버튼 이벤트*/
 function popupOpen(){
-	var popUrl="myPageTab/memberLevelInfo.html";
+	var popUrl="${path}/myPageTab/memberLevelInfo.html";
 	
 	var popupWidth = 740;
 	var popupHeight = 575;
@@ -48,7 +48,7 @@ function popupOpen(){
 
 /* 쪽지쓰기 버튼 이벤트 */
 function sendmessagePopup(){
-	var url="myPageTab/sendmessagePopup.html";
+	var url="${path}/myPageTab/sendmessagePopup.html";
 	
 	//var option = "width=300, height=300;";
 	
@@ -62,7 +62,7 @@ function sendmessagePopup(){
 
 /* 회원정보수정 버튼 이벤트 */
 function userInfoPopup(){
-	var url = "myPageTab/userInfoUpdateForm.html";
+	var url = "${path}/myPageTab/userInfoUpdateForm.html";
 	
 	var newOption = setting(500,500);
 	
@@ -71,7 +71,7 @@ function userInfoPopup(){
 
 /* 내 쪽지함 버튼 이벤트 */
 function myMsgsPopup(){
-	var url = "myPageTab/my_receivedMail.html";
+	var url = "${path}/myPageTab/my_receivedMail.html";
 	
 	var newOption = setting(500,471);
 	
